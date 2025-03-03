@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scanner_pdf/generated/l10n.dart';
 
 class DiamondBottomSheet extends StatefulWidget {
   const DiamondBottomSheet({super.key});
@@ -26,7 +27,7 @@ class _DiamondBottomSheetState extends State<DiamondBottomSheet> {
                 InkWell(
                   onTap: () {},
                   child: Text(
-                    'Восстановить',
+                    S.of(context).restore,
                     style: textTheme.bodyMedium?.copyWith(
                       color: Colors.blueAccent,
                     ),
@@ -37,7 +38,7 @@ class _DiamondBottomSheetState extends State<DiamondBottomSheet> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'Пропустить',
+                    S.of(context).skip,
                     style: textTheme.bodyMedium?.copyWith(
                       color: Colors.blueAccent,
                     ),
@@ -47,7 +48,7 @@ class _DiamondBottomSheetState extends State<DiamondBottomSheet> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Обновите до Pro-версии и\n получите доступ ко всем\n возможностям приложения',
+              S.of(context).update_header,
               textAlign: TextAlign.center,
               style: textTheme.titleMedium?.copyWith(
                 color: Colors.white,
@@ -58,19 +59,17 @@ class _DiamondBottomSheetState extends State<DiamondBottomSheet> {
             const SizedBox(height: 16),
 
             Text(
-              '• Пакетное сканирование\n'
-              '• Экспорт без ограничений\n'
-              '• Неограниченное количество сканирований\n'
-              '• Распознавание текста (OCR)\n',
+              S.of(context).update_desc,
               style: textTheme.bodyMedium?.copyWith(color: Colors.white60),
               textAlign: TextAlign.center,
             ),
 
             const SizedBox(height: 8),
 
-            _buildPlanOption(index: 0, title: 'Pro (1 месяц) 4,49\$'),
-            _buildPlanOption(index: 1, title: 'Pro (1 месяц) 9,99\$'),
-            _buildPlanOption(index: 2, title: 'Pro (1 год) 28,99\$'),
+            _buildPlanOption(index: 0, title: S.of(context).price_1),
+            _buildPlanOption(index: 1, title: S.of(context).price_2),
+            _buildPlanOption(index: 2, title: S.of(context).price_3),
+            _buildPlanOption(index: 3, title: S.of(context).price_4),
 
             const SizedBox(height: 16),
 
@@ -82,14 +81,14 @@ class _DiamondBottomSheetState extends State<DiamondBottomSheet> {
                   backgroundColor: Colors.blueAccent,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                child: const Text('Начать бесплатно пробный период'),
+                child: Text(S.of(context).test_period, style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
               ),
             ),
 
             const SizedBox(height: 8),
 
             Text(
-              'Пробный период 7 дней. Можно отменить в любое время.',
+              S.of(context).test_period_desc,
               style: textTheme.bodySmall?.copyWith(color: Colors.white54),
               textAlign: TextAlign.center,
             ),

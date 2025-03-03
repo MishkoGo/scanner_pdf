@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// тем екстеншн для текстовых стилей, по аналогии с цветами
 class TextStyleLibrary extends ThemeExtension<TextStyleLibrary> {
   final TextStyle h1;
   final TextStyle body;

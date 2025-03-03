@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// тем екстеншн для цветов. добавляешь новые цвета сюда по примеру.
 class ColorLibrary extends ThemeExtension<ColorLibrary> {
   final Color background;
   final Color surface;
@@ -59,14 +58,13 @@ class ColorLibrary extends ThemeExtension<ColorLibrary> {
     );
   }
 
-  // lerp означает линейную интерполяцию. когда мы заменяем themedata в материал аппе, тот создает анимацию и вызывает у всех themeextension метод lerp.
+  
   @override
   ThemeExtension<ColorLibrary> lerp(covariant ColorLibrary? other, double t) {
     if (other is! ColorLibrary) {
       return this;
     }
     return ColorLibrary._(
-      // буквально: анимируй старый бэкграунд колор в новый со значением t (от 0 до 1)
       background: Color.lerp(background, other.background, t)!,
       surface: Color.lerp(surface, other.surface, t)!,
       textColor: Color.lerp(textColor, other.textColor, t)!,

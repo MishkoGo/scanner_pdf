@@ -9,14 +9,18 @@ import 'package:scanner_pdf/common/models/document_provider.dart';
 import 'package:scanner_pdf/common/style/cubit/theme_cubit.dart';
 import 'package:scanner_pdf/generated/l10n.dart';
 import 'package:scanner_pdf/l10n/l10n.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:share_plus/share_plus.dart';
-
 
 class DocScannerScreen extends StatelessWidget {
   const DocScannerScreen({Key? key}) : super(key: key);
 
   void _showRenameDialog(BuildContext context, Document document) {
-    final TextEditingController controller = TextEditingController(text: document.documentName);
+    final TextEditingController controller = TextEditingController(
+      text: document.documentName,
+    );
     showDialog(
       context: context,
       builder: (context) {
@@ -35,8 +39,10 @@ class DocScannerScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Provider.of<DocumentProvider>(context, listen: false)
-                    .renameDocument(document, controller.text);
+                Provider.of<DocumentProvider>(
+                  context,
+                  listen: false,
+                ).renameDocument(document, controller.text);
                 Navigator.pop(context);
               },
               child: Text(S.of(context).save),
@@ -64,12 +70,55 @@ class DocScannerScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _shareDocument(String imagePath) async {
+  Future<void> shareDocumentAsPdf(String imagePath) async {
     if (imagePath.isNotEmpty) {
       try {
-        await Share.shareXFiles([XFile(imagePath)], text: 'Вот документ');
+        // Проверяем, существует ли файл изображения
+        final imageFile = File(imagePath);
+        if (!await imageFile.exists()) {
+          print('Изображение не найдено');
+          return;
+        }
+
+        // Читаем байты изображения
+        final imageBytes = await imageFile.readAsBytes();
+
+        // Создаём PDF-документ
+        final pdf = pw.Document();
+        final pdfImage = pw.MemoryImage(imageBytes);
+
+        // Добавляем страницу с изображением в качестве фонового
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat.a4,
+            build: (pw.Context context) {
+              return pw.Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: pw.BoxDecoration(
+                  image: pw.DecorationImage(
+                    image: pdfImage,
+                    fit: pw.BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+
+        // Получаем путь для сохранения PDF (например, во временной папке)
+        final tempDir = await getTemporaryDirectory();
+        final pdfPath =
+            '${tempDir.path}/document_${DateTime.now().millisecondsSinceEpoch}.pdf';
+
+        // Сохраняем PDF-файл
+        final pdfFile = File(pdfPath);
+        await pdfFile.writeAsBytes(await pdf.save());
+
+        // Отправляем PDF-файл
+        await Share.shareXFiles([XFile(pdfPath)], text: 'Вот документ');
       } catch (e) {
-        print('Ошибка при отправке: $e');
+        print('Ошибка при отправке PDF: $e');
       }
     } else {
       print('Изображение не найдено');
@@ -190,7 +239,10 @@ class DocScannerScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextButton.icon(
-                                    onPressed: () => documentProvider.deleteDocument(document),
+                                    onPressed:
+                                        () => documentProvider.deleteDocument(
+                                          document,
+                                        ),
                                     icon: Icon(
                                       Icons.delete,
                                       color: context.color.textColor,
@@ -202,11 +254,18 @@ class DocScannerScreen extends StatelessWidget {
                                       foregroundColor: context.color.textColor,
                                       textStyle: context.textStyles.button,
                                       elevation: 0,
-                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 0,
+                                      ),
                                     ),
                                   ),
                                   TextButton.icon(
-                                    onPressed: () => _showRenameDialog(context, document),
+                                    onPressed:
+                                        () => _showRenameDialog(
+                                          context,
+                                          document,
+                                        ),
                                     icon: Icon(
                                       Icons.edit,
                                       color: context.color.textColor,
@@ -218,11 +277,18 @@ class DocScannerScreen extends StatelessWidget {
                                       foregroundColor: context.color.textColor,
                                       elevation: 0,
                                       textStyle: context.textStyles.button,
-                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 0,
+                                      ),
                                     ),
                                   ),
                                   TextButton.icon(
-                                    onPressed: () => _showFullScreenImage(context, document.imagePath),
+                                    onPressed:
+                                        () => _showFullScreenImage(
+                                          context,
+                                          document.imagePath,
+                                        ),
                                     icon: Icon(
                                       Icons.visibility,
                                       color: context.color.textColor,
@@ -234,14 +300,18 @@ class DocScannerScreen extends StatelessWidget {
                                       foregroundColor: context.color.textColor,
                                       textStyle: const TextStyle(fontSize: 13),
                                       elevation: 0,
-                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 0,
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                               const SizedBox(width: 9),
                               IconButton(
-                                onPressed: () => _shareDocument(document.imagePath),
+                                onPressed:
+                                    () => shareDocumentAsPdf(document.imagePath),
                                 icon: Icon(
                                   Icons.share,
                                   color: context.color.textColor,

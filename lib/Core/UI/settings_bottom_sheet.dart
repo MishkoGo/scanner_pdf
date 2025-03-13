@@ -63,50 +63,117 @@ class SettingsBottomSheet extends StatelessWidget {
                 _showTextBottomSheet(
                   context,
                   title: S.of(context).political,
-                  text: '''. INTRODUCTION. REGIONAL PATTERNS (CALIFORNIA)
+                  text: '''
 
-Chebulaev Oleg Valerevich (“we,” “us” or “our”) takes your privacy seriously. This Privacy policy (“Privacy policy”) explains our data protection policy and describes the types of information we may process when you install and/or use “Doc Scanner — scan to PDF” software application for mobile devices (the “App”, “our App”).
+This Privacy Policy describes how Victor Bondarev ("we," "us," or "our") collects, uses, and discloses your information when you use the mobile application DOC CAM Scanner App To PDF pro (the "App"). By downloading, accessing, or using the App, you consent to the data practices described in this Privacy Policy.
 
-When we refer to personal data (or personal information) we mean any information of any kind relating to a natural person who can be identified, directly or indirectly, in particular by reference to such data.
+1. INFORMATION WE COLLECT
 
-It is a natural person who can be identified directly or indirectly, in particular by reference to an identification number or to one or more factors specific to his or her physical, physiological, mental, economic, cultural or social status.
+When you use our App, we may collect the following types of information:
 
-Our Privacy policy applies to all users, and others who access the App (“Users”).
+1.1 Personal Data
 
-For the purposes of the GDPR, we are the data controller, unless otherwise stated.
+We do not collect, store, or share any personally identifiable information ("PII") unless explicitly provided by you (e.g., customer support inquiries).
 
-IF YOU ARE A CALIFORNIA RESIDENT PLEASE READ THE FOLLOWING IMPORTANT NOTICE
+1.2 Non-Personal Data
 
-Under the California Consumer Privacy Act of 2018 (CCPA) California residents shall have the right to request:
+We may collect non-personal information related to your use of the App, including but not limited to:
 
- • the categories of personal information that is processed;
- • the categories of sources from which personal information is obtained;
- • the purpose for processing of user personal data;
- • the categories of third parties with whom we may share your personal information;
- • the specific pieces of personal information that we might have obtained about particular user provided that the data given in the request is reliable enough and allows to identify the user.
+ ● Device model and operating system
+ ● App usage statistics
+ ● Crash logs (to improve app performance)
 
-Please use the navigation links through this Privacy Policy:
+1.3 Document Data
 
-PERSONAL INFORMATION
-All about the categories of information, its sources and purposes of processing >>
+ ● The App allows you to scan, store, and share documents locally on your device.
+ ● We do not collect or store any scanned documents, images, or content you process within the App.
+ ● Your scanned files remain private and are never transmitted to our servers or third-party services unless you choose to share them.
 
-Please mind that according to CCPA personal information does not include de-identified or aggregated consumer information.
+2. HOW WE USE YOUR INFORMATION
 
-SHARING
-How your information can be shared >>
+We use the collected data solely for the following purposes:
 
-Please note that all third parties that are engaged in processing user data are service providers that use such information on the basis of agreement and pursuant to business purpose.
+ ● To provide and improve the App's functionality
+ ● To analyze App performance and usage trends
+ ● To troubleshoot issues and prevent fraud
 
-OPT-OUT OPTIONS
-If you don’t want us to process your personal information any more please contact us through e-mail to alegch@bk.ru In most cases there is no way to maintain the App’s further operating without functional data therefore you will be advised to remove the App from your device.
+We do not sell, rent, or share your personal or document data with third parties.
 
-If you don’t want us to share device identifiers and geolocation data with service providers please check your device settings to opt out as described below >>
+3. THIRD-PARTY SERVICES
 
-REQUESTS
-To submit a verifiable consumer request for access, portability or deletion personal data please contact us through e-mail to alegch@bk.ru. Please include in the text of your appeal the wording "Your rights to maintain confidentiality in the state of California”.
+The App may integrate with third-party services, such as:
 
-When submitting a verifiable request, you should be ready to:
-• Provide sufficient information that allows us to reasonably verify you are the person about whom we collected personal information or an authorized representative, which may include: name, address, city, state, and zip code and email address. We may use this information to surface a series of security questions to you to verify your identity. If you are making a request through an authorized agent acting on your behalf, such authorized agent must provide written authorization confirming or a power of attorney, signed by you.''',
+● Cloud storage providers (e.g., iCloud, Google Drive, Dropbox) for file export
+● Apple’s services (e.g., iCloud sync)
+Any data you share with third-party services is subject to their respective privacy policies. We are not responsible for data processing by third parties.
+
+ 
+4. DATA SECURITY
+
+We take appropriate security measures to protect your information, including:
+
+● Secure data storage on your device
+● Encryption protocols for data transmission where applicable
+However, no digital system is 100% secure, and we cannot guarantee absolute security.
+
+ 
+5. YOUR RIGHTS AND CHOICES
+
+As a user, you have the following rights:
+
+● Access & Deletion: You can delete all stored documents directly from your device.
+● Opt-Out: You can disable data collection (such as analytics) in the App settings or your device's privacy settings.
+ 
+6. CHILDREN’S PRIVACY
+
+The App is not intended for children under 13. We do not knowingly collect personal data from minors. If you are a parent or guardian and believe your child has provided us with data, please contact us to request deletion.
+
+ 
+7. CHANGES TO THIS PRIVACY POLICY
+
+We reserve the right to update this Privacy Policy at any time. Changes will be effective immediately upon posting in the App. Continued use of the App after updates constitutes acceptance of the revised Privacy Policy.
+
+ 
+8. CONTACT US
+
+If you have any questions about this Privacy Policy, please contact us at: Victor Bondarev
+Email: viktor_bondarev@mail.ru
+
+9. DATA RETENTION
+
+We retain non-personal data only for as long as necessary to fulfill the purposes outlined in this Privacy Policy. Any personal data voluntarily provided by you (such as customer support inquiries) will be retained only as long as required to resolve the issue or comply with legal obligations.
+
+ 
+10. INTERNATIONAL DATA TRANSFERS
+
+Your information is stored and processed on your device, and we do not transfer data to external servers. If you use third-party services for cloud storage, your data may be transferred and processed in accordance with their policies.
+
+ 
+11. USER CONSENT AND CONTROL
+
+By using the App, you acknowledge and agree to the terms of this Privacy Policy. You have the right to withdraw your consent at any time by uninstalling the App and discontinuing use.
+
+ 
+12. LEGAL COMPLIANCE
+
+This Privacy Policy complies with applicable data protection laws, including but not limited to:
+
+● General Data Protection Regulation (GDPR) (EU)
+● California Consumer Privacy Act (CCPA) (USA)
+● Apple’s App Store Review Guidelines
+
+We are committed to ensuring the privacy and security of our users' data in accordance with these regulations.
+
+ 
+Compliance with Apple’s Requirements: This Privacy Policy complies with Apple’s App Store Review Guidelines, ensuring:
+
+● Transparency in data collection and use
+● User control over their data
+● Strict data security measures
+● No unnecessary tracking or sharing with third parties
+
+By using the App, you acknowledge that you have read and understood this Privacy Policy.
+''',
                 );
               },
             ),
@@ -116,99 +183,59 @@ When submitting a verifiable request, you should be ready to:
                 _showTextBottomSheet(
                   context,
                   title: S.of(context).rules_uses,
-                  text: ''' INTRODUCTION \n
+                  text: '''
+1. INTRODUCTION Welcome to DOC CAM Scanner App ("App"). These Terms of Use ("Terms") govern your access to and use of the App and related services. By using the App, you agree to comply with these Terms. If you do not agree, please do not use the App.
 
-These Terms of Use and End User License Agreement (collectively, the “Agreement”) together with all the documents referred to in it constitute a legally binding agreement made between you as a natural person (“you”, “your” or “user”) and Chebulaev Oleg Valerevich (“we,” “us” or “our”), concerning your access to and use of “Doc Scanner — scan to PDF” software application for mobile devices (the “App”).
-All the documents that relate to the App are hereby expressly incorporated herein by reference.
-Please read this Agreement carefully before you download, install or use the App.
-It is important that you read and understand this Agreement as by downloading, installing or using the App you indicate that you have read, understood, agreed and accepted the Agreement which takes effect on the date on which you download, install or use the App. By using the App you agree to abide by this Agreement.
-If you do not agree with (do not accept) this Agreement, or if you do not agree at least with one of the provisions of this Agreement, you are not authorized to, and you may not access, download, install or use the App and you must promptly discontinue downloading, installing the App and remove (delete) the App from any mobile device in your possession or under your control.
-II. CHANGES TO THIS AGREEMENT
-We reserve the right, at our sole discretion, to make changes or modifications to this Agreement at any time and for any reason. We will keep you informed about any changes by updating this Agreement and you waive any right to receive specific notice of each such change. It is your responsibility to periodically review this Agreement to stay informed of updates. You will be subject to, and will be deemed to be aware of and to have accepted, the changes in any revised Agreement by your continued use of the App after the date such revised Agreement is posted.
-III. RESTRICTIONS ON WHO CAN USE THE APP
-In order to download, install, access or use the App, you must (a) be eighteen (18) years of age or older.
-All users who are minors in the jurisdiction in which they reside (generally under the age of 18) must have the permission of, and be directly supervised by, their parent or guardian to use the App, so if you are between the ages of thirteen (13) and seventeen (17) years and you wish to use download, install, access or use the App, before doing so you must: (a) assure and confirm (if needed) that your parent or guardian have read and agree (get your parent or guardian’s consent) to this Agreement prior to you using the App; (b) have the power to enter a binding contract with us and not be barred from doing so under any applicable laws.
-Parents and guardians must directly supervise any use of the App by minors.
-Any person under the age of thirteen (13) years is not permitted to download, install, access or use the App.
-You affirm that you are either more than eighteen 18 years of age, or an emancipated minor, or possess legal parental or guardian consent, and are fully able and competent to enter into the terms, conditions, obligations, affirmations, representations, and warranties set forth in this Agreement, and to abide by and comply with this Agreement.
-IV. GENERAL TERMS
-The App is a utility program designed to enhance your device experience. The App allows to scan any types of document to high quality PDF or JPEG; to save and store any scan copies of documents on your mobile devices; to share your scans via email; upload scanned documents to cloud services like Dropbox, Evernote or Google Drive (see the full performance list on the App’s page on itunes.apple.com). All documents shall be stored locally on your device and shall never be sent to any third-party unless you export them to other apps or devices by means of the App.
-The App is intended only for your personal non-commercial use. You shall use the App only for the purposes, mentioned above.
-V. PRIVACY POLICY
-Your privacy is very important to us. Accordingly, we have developed the Privacy Policy in order for you to understand how we process, use and store information including personal data. Access to the App and use of the Services is subject to the Privacy Policy. By accessing the App and by continuing to use the Services, you are deemed to have accepted the Privacy Policy, and in particular, you are deemed to have acknowledged the ways we process your information as well as appropriate legal grounds for processing described in the Privacy Policy. We reserve the right to amend the Privacy Policy from time to time. If you disagree with any part of the Privacy Policy, you must immediately stop using the App and Services. Please read our Privacy Policy carefully.
-VI. END USER LICENSE AGREEMENT
-By using the App, you undertake to respect our intellectual rights (intellectual rights related to the App’s source code, UI/UX design, content material, copyright and trademarks, hereinafter referred to as the “Intellectual Property Rights”) as well as those owned by third parties.
-As long as you keep using the App, we grant you a limited, non-exclusive, non-transferable non-sublicensable, non-assignable and revocable license to access and use the App pursuant to this Agreement on any Apple-branded products that you own or control except that the App may be accessed and used by other accounts associated with you via Family Sharing or volume purchasing (the “License”).
-The source code, design and content, including information, photographs, illustrations, artwork and other graphic materials, sounds, music or video (hereinafter – the “works”) as well as names, logos and trademarks (hereinafter – “means of individualization”) within the App are protected by copyright laws and other relevant laws and/or international treaties, and belong to us and/or our partners and/or contracted third parties, as the case may be.
-In the event of any third party claim that your possession and use of the App infringes that third party’s intellectual property rights, Apple will not be responsible for the investigation, defense, settlement and discharge of any such intellectual property infringement claim.
-These works and means of individualization may not be copied, reproduced, retransmitted, distributed, disseminated, sold, published, broadcasted or circulated whether in whole or in part, unless expressly permitted by us and/or our partners and/or contracted third parties, as the case may be.
-All rights, title and interest in and to the App and its content, works and means of individualization as well as its functionalities (1) are the exclusive property of BP Mobile LLC and/or our partners and/or contracted third parties, (2) are protected by the applicable international and national legal provisions, and (3) are under no circumstances transferred (assigned) to you in full or in part within the context of the license herewithin.
-We will not hesitate to take legal action against any unauthorized use of our trademarks, names or symbols to protect and restore our rights. All rights not expressly granted herein are reserved. Other product and company names mentioned herein may also be the trademarks of their respective owners.
-VII. PROHIBITED BEHAVIOUR
-You agree not to use the App in any way that:
-	•	is unlawful, illegal or unauthorized;
-	•	is defamatory of any other person;
-	•	is obscene or offensive;
-	•	infringes any copyright, database right or trademark of any other person;
-	•	advocates, promotes or assists any unlawful act such as (by way of example only) copyright infringement or computer misuse.
-You shall not make the App available to any third parties. In addition, you shall not modify, translate into other languages, reverse engineer, decompile, disassemble or otherwise create derivative works from the App or any documentation concerning the App.
-You shall not transfer, lend, rent, lease, distribute the App, or use it for providing services to a third party, or grant any rights to the App or any documentation concerning the App to a third party.
-Misuse of any trademarks or any other content displayed on the App is prohibited.
-You shall not copy and/or duplicate and/or distribute and/or publish and/or use any content in the App, directly or indirectly, by way of a violation of our Intellectual Property Rights.
-Moreover, you shall not make any attempts to use the App or part thereof for malicious intentions.
-Also we are not responsible for the way you use the App.
-It is clarified that we may adopt, against a user who violated the present Agreement, any legal measures at our disposal pursuant to the applicable laws.
-All disputes arising from the usage of the App, shall be governed by and construed in accordance with the laws of the United States of America, and shall be submitted to the sole jurisdiction of the competent courts of New York, New York, the United States of America.
-VIII. AVAILABILITY OF THE APP, SECURITY AND ACCURACY
-In order to use the App, you are required to have a compatible mobile phone or tablet, and internet access. However, please note that we offer you widgets that save translations and allow you to access them later in offline mode.
-The App is available for downloading and installing on handheld compatible mobile devices running Apple iOS Operating System 11.0 with minimum system requirements.
-We do not warrant that the App will be compatible with all hardware and software which you may use.
-We make no warranty that your access to the App will be uninterrupted, timely or error-free. Neither does Apple have an obligation whatsoever to furnish any maintenance and support services with respect to the App.
-You acknowledge the App is provided via the internet and mobile networks and so the quality and availability of the App may be affected by factors outside our reasonable control.
-The version of the App may be upgraded from time to time to add support for new functions and services.
-We may change or update the App and anything described in it without noticing you. If the need arises, we may suspend access to the App, or close it indefinitely.
-You also warrant that any information that you submit to us is true, accurate and complete, and you agree to keep it actual at all times.
-You can discontinue using our Services at any time by choosing the relevant option in your iTunes Account Settings. If you decide not to use the App for any reason you should uninstall the App.
-IX. CHARGES
-The App is provided on free basis. Once you download the App, you’ll have access to its basic features.
-Access to some services and/or additional features within the App requires paid subscriptions. The full list of Premium options and pricing is provided on the App’s page. You will have an opportunity to try Premium options during the free trial period as provided on the signup screen. After the free trial period expires an auto-renewing subscription period will start on a regular basis. Please mind that you will be charged automatically unless you cancel your subscription 24 hours before the end of the free trial period. When you cancel your subscription you will still have access to basic functions of the App. Premium options are available during the whole free trial period.
-You can choose different subscription options. Current subscription price starts at 7.99/month. Prices are in U.S. dollars and may vary in countries other than the U.S. You will have all necessary information about your subscription plan and duration of the free trial period on the signup screen before the purchase.
-Subscription with a free trial period will automatically renew to a paid subscription. Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription, where applicable. We reserve the right to modify, terminate or otherwise amend our offered subscription plans at any time.
-Your subscription will be automatically renewed within 24 hours before the current subscription ends. Auto-renew option can be turned off in your iTunes Account Settings at least 24 hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. No cancellation of the current subscription is allowed during active subscription period. Subscriptions are managed by you. Please note that removing the App from your device does not deactivate your subscription.
-Certain services within the App may be available as an In-App Purchase.
-You may be charged by your communications service provider for downloading and/or accessing the App on your mobile phone or tablet device, so you should check the terms of agreement with your operator. This may include data roaming charges if you do this outside your home territory. All these charges are solely your responsibility. If you do not pay the bills related to your mobile phone or tablet device, then we assume that you have the permission from the person that does it before incurring any of these charges.
-X. THIRD PARTY WEBSITES AND RESOURCES
-The App may link you to other sites on the Internet and contracted third parties to provide you certain services. We have no control over and accept no responsibility for the content of any website or mobile application to which a link from the App exists (unless we are the provider of those linked websites or mobile applications). Such linked websites and mobile applications are provided “as is” for your convenience only with no warranty, express or implied, for the information provided within them.
-You acknowledge that you must comply with applicable third party terms of agreement when using the App. You are solely responsible for and bear all risks arising from your use of any third-party websites or resources.
-If you have any queries, concerns or complaints about such third party websites or mobile applications (including, but not limited to, queries, concerns or complaints relating to products, orders for products, faulty products and refunds) you must direct them to the operator of that third party website or mobile application.
-XI. DISCLAIMER OF WARRANTIES
-YOU AGREE THAT YOUR USE OF THE APP AND ITS SERVICES SHALL BE AT YOUR SOLE RISK. THE SERVICES AND ALL THE MATERIALS, INFORMATION, SOFTWARE, CONTENT INTEGRATED IN THE APP ARE PROVIDED “AS IS” AND “AS AVAILABLE”. WE DO NOT MAKE ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, WITH REGARD TO THE MERCHANTABILITY, TECHNICAL COMPATIBILITY OR FITNESS FOR A PARTICULAR PURPOSE OF ANY SERVICE, PRODUCTS OR MATERIAL PROVIDED PURSUANT TO THIS AGREEMENT. WE DO NOT WARRANT THAT THE FUNCTIONS CONTAINED ON OR THROUGH THE SERVICES WILL BE AVAILABLE, UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT THE SERVICES OR THE SERVERS THAT MAKE THE SERVICE AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. WE ARE NOT RESPONSIBLE FOR BREACHES OF INDIVIDUAL’S PRIVACY AS A RESULT OF YOUR MISUSE OF THE APP. YOU ARE SOLELY RESPONSIBLE FOR OBTAINING A PERSON’S CONSENT FOR TRACKING WITHIN THE APP AND GUARANTEE THAT SUCH CONSENT IS VOLUNTARY, EXPLICIT AND UNAMBIGUOUS.
-We do not give you any guarantee for the proper functionality of the App, however, if you believe that our App has not met your expectations, you may notify Apple, and Apple may refund the purchase price for the App to you; and that, to the maximum extent permitted by applicable law, Apple will have no other warranty obligation whatsoever with respect to the App, and any other claims, losses, liabilities, damages, costs or expenses attributable to any failure to conform to any warranty.
-XII. LIMITATION OF LIABILITY
-IN NO EVENT SHALL WE BE LIABLE FOR DAMAGES OF ANY TYPE, WHETHER DIRECT OR INDIRECT, ARISING OUT OF OR IN ANY WAY RELATED TO THE APP AND SERVICES PROVIDED BY THE APP. WE SHALL NOT BE LIABLE UNDER ANY CIRCUMSTANCES FOR ANY SPECIAL, CONSEQUENTIAL, INCIDENTAL, EXEMPLARY OR PUNITIVE DAMAGES, OR LOSS OF PROFIT OR REVENUES, EVEN IF WE HAVE BEEN SPECIFICALLY ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. WE SHALL NOT BE LIABLE UNDER ANY CIRCUMSTANCES FOR DAMAGES ARISING OUT OF OR IN ANY WAY RELATED TO PRODUCTS, SERVICES AND/OR INFORMATION OFFERED OR PROVIDED BY ANY THIRD-PARTIES AND ACCESSED THROUGH THE APP OR BY ANY OTHER MEANS. YOU ALSO SPECIFICALLY ACKNOWLEDGE THAT WE ARE NOT LIABLE FOR COSTS OR DAMAGES ARISING OUT OF PRIVATE OR GOVERNMENTAL LEGAL ACTIONS RELATED TO YOUR USE OF ANY OF THE APP AND ITS SERVICES IN ANY COUNTRY.
-Apple is not responsible for addressing your claims relating to the App or your possession and/or use of the App, including, but not limited to: (i) product liability claims; (ii) any claim that the App fails to conform to any applicable legal or regulatory requirement; and (iii) claims arising under consumer protection, privacy, or similar legislation.
-XIII. LEGAL COMPLIANCE
-You must represent and warrant that (i) you are not located in a country that is subject to a U.S. Government embargo, or that has been designated by the U.S. Government as a “terrorist supporting” country; and (ii) you are not listed on any U.S. Government list of prohibited or restricted parties.
-XIV. THIRD PARTY BENEFICIARY
-You acknowledge and agree that Apple, and Apple’s subsidiaries are the third party beneficiaries of the present end-user license agreement, and that upon your acceptance of the terms and conditions of the present Terms of Use and EULA, Apple will have the right (and will be deemed to have accepted the right) to enforce these Terms of Use and EULA as a third party beneficiary thereof.
-XV. GOVERNING LAW AND CLAIMS
-This Agreement shall be governed by and construed in accordance with the laws of the State of New York, USA.
-We make no representations that the App is appropriate or available for use in other locations. Those who access or use the App from other jurisdictions do so at their own volition and are responsible for compliance with local law.
-If you choose to access or use the App from or in locations outside of the United States, you are responsible for:
-	•	ensuring that what you are doing in that country is legal; and
-	•	b) the consequences and compliance by you with all applicable laws, regulations, byelaws, codes of practice, licenses, registrations, permits and authorizations.
-Any claims shall be exclusively decided by courts of competent jurisdiction in New York, New York, USA, and that applicable Federal law shall govern, without regard to choice of law principles.
-If you ever wish to seek any relief from us, you agree to waive the ability to pursue class action.
-If any controversy, allegation, or claim (including any non-contractual claim) arises out of or relates to the App and the Services provided by the App or this Agreement, then you and we agree to send a written notice to each other providing a reasonable description of the dispute, along with a proposed resolution of it. The notice shall be sent based on the most recent contact information. For a period of sixty (60) days from the date of receipt of notice from the other party, you and us will engage in a dialogue in order to attempt to resolve the dispute, though nothing will require either you or us to resolve the dispute on terms which either you or us, in each of our sole discretion, are uncomfortable with.
-XVI. TERMINATION
-We reserve the right to terminate this Agreement at any time at its sole discretion for any reason.
-Upon any termination (a) the rights and licenses granted to you herein shall terminate; (b) you must cease all use of the App.
-XVI. SEVERABILITY
-If at any time any provision of this Agreement is or becomes illegal, invalid or unenforceable in any respect, that provision shall be read down to become legal, invalid or unenforceable or, if this is not possible, deleted. The other terms of this Agreement shall continue to apply with full force and effect.
-You shall not assign or transfer or purport to assign or transfer the contract between you and us to any other person.
-XVIII. CONTACT INFORMATION
-We reserve the right to respond to user support requests. If you want to submit a support request or have any questions about this Agreement or the App, please contact us using e-mail to alegch@bk.ru.',
-                ''',
+2. ELIGIBILITY You must be at least 18 years old to use this App. By using the App, you represent that you meet this requirement.
+
+3. LICENSE GRANT We grant you a limited, non-exclusive, non-transferable, revocable license to use the App solely for personal, non-commercial purposes, subject to these Terms.
+
+4. USER DATA AND PRIVACY Your privacy is important to us. Please review our Privacy Policy, which explains how we collect, use, and share your personal data.
+
+5. ACCEPTABLE USE You agree not to:
+
+● Use the App for any illegal or unauthorized purpose.
+● Disrupt or interfere with the App’s security or functionality.
+● Reverse-engineer, decompile, or disassemble the App.
+
+6. INTELLECTUAL PROPERTY All rights, title, and interest in the App and its content belong to us or our licensors. You may not use any content without our prior written permission.
+
+7. PAYMENTS AND SUBSCRIPTIONS The App may offer in-app purchases and subscriptions through Apple App Store. Payments are processed by Apple, and their terms apply. We do not store or process payment details.
+
+8. TERMINATION We reserve the right to suspend or terminate your access to the App if you violate these Terms.
+
+9. DISCLAIMER OF WARRANTIES The App is provided "as is" without warranties of any kind. We do not guarantee uninterrupted or error-free use.
+
+10. LIMITATION OF LIABILITY To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the App.
+
+11. GOVERNING LAW These Terms are governed by the laws of the United States and the State of California.
+
+12. CHANGES TO THESE TERMS We may update these Terms from time to time. Continued use of the App after changes means you accept the new Terms.
+
+13. CONTACT INFORMATION If you have any questions, contact us at viktor_bondarev@mail.ru.
+
+14. THIRD-PARTY SERVICES The App may contain links to third-party websites and services. We are not responsible for the content, policies, or practices of any third-party services. Your interactions with third-party services are solely your responsibility.
+
+15. SUPPORT AND UPDATES We may provide periodic updates to improve functionality and security. You agree to receive these updates as part of your use of the App. If you experience any issues, you may contact our support team at viktor_bondarev@mail.ru.
+
+16. DATA STORAGE AND SECURITY We take reasonable measures to protect your personal data, but we cannot guarantee absolute security. You acknowledge and accept the risks associated with transmitting data over the internet.
+
+17. USER-GENERATED CONTENT If the App allows you to submit content, you grant us a non-exclusive, worldwide, royalty-free license to use, modify, and distribute such content for the operation of the App. You agree not to submit illegal, offensive, or infringing content.
+
+18. SEVERABILITY If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will continue in full force and effect.
+
+19. ENTIRE AGREEMENT These Terms constitute the entire agreement between you and us regarding the use of the App and supersede any prior agreements or understandings, whether written or oral.
+
+20. DISPUTE RESOLUTION Any disputes arising from these Terms shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association. You waive your right to participate in class-action lawsuits or class-wide arbitration.
+
+21. INDEMNIFICATION You agree to indemnify, defend, and hold harmless us and our affiliates from any claims, liabilities, damages, losses, or expenses arising from your use of the App or violation of these Terms.
+
+22. FORCE MAJEURE We shall not be held liable for any failure or delay in performance due to circumstances beyond our reasonable control, including natural disasters, acts of war, cyber-attacks, or regulatory changes.
+
+23. APP UPDATES AND MODIFICATIONS We reserve the right to modify or discontinue any aspect of the App at any time without prior notice. Your continued use of the App after updates constitutes acceptance of the changes.
+
+
+                    ''',
                 );
               },
             ),
@@ -262,7 +289,7 @@ void _showLanguageSelectionBottomSheet(BuildContext context) {
                       S.of(context).russian_lang,
                       style: TextStyle(color: Colors.white),
                     ),
-                     onTap: () {
+                    onTap: () {
                       Provider.of<LocaleProvider>(
                         context,
                         listen: false,
@@ -270,30 +297,46 @@ void _showLanguageSelectionBottomSheet(BuildContext context) {
                       Navigator.pop(context);
                     },
                   ),
-                  
+
+                  ListTile(
+                    title: Text(
+                      S.of(context).ukraine_lang,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onTap: () {
+                      Provider.of<LocaleProvider>(
+                        context,
+                        listen: false,
+                      ).setLocale(const Locale('uk'));
+                      Navigator.pop(context);
+                    },
+                  ),
                   ListTile(
                     title: Text(
                       S.of(context).espan_lang,
                       style: TextStyle(color: Colors.white),
                     ),
-                    onTap: () => Navigator.pop(context, 'испанский'),
-                  ),
-                  
-                  ListTile(
-                    title:  Text(
-                      S.of(context).ukraine_lang,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () => Navigator.pop(context, 'немецкий'),
+                    onTap: () {
+                      Provider.of<LocaleProvider>(
+                        context,
+                        listen: false,
+                      ).setLocale(const Locale('es'));
+                      Navigator.pop(context);
+                    },
                   ),
                   ListTile(
                     title: Text(
                       S.of(context).chinese_lang,
                       style: TextStyle(color: Colors.white),
                     ),
-                    onTap: () => Navigator.pop(context, 'немецкий'),
+                    onTap: () {
+                      Provider.of<LocaleProvider>(
+                        context,
+                        listen: false,
+                      ).setLocale(const Locale('zh'));
+                      Navigator.pop(context);
+                    },
                   ),
-                  
                 ],
               ),
             );

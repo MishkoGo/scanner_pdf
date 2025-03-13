@@ -225,40 +225,40 @@ class S {
     );
   }
 
-  /// `Pro (7 days) 339,00 \₽`
+  /// `Pro (7 days) 339,00 ₽`
   String get price_1 {
     return Intl.message(
-      'Pro (7 days) 339,00 \\₽',
+      'Pro (7 days) 339,00 ₽',
       name: 'price_1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Pro (1 mouht) 739,00 \₽`
+  /// `Pro (1 mouht) 739,00 ₽`
   String get price_2 {
     return Intl.message(
-      'Pro (1 mouht) 739,00 \\₽',
+      'Pro (1 mouht) 739,00 ₽',
       name: 'price_2',
       desc: '',
       args: [],
     );
   }
 
-  /// `Pro (3 mouht) 1 450,00 \₽`
+  /// `Pro (3 mouht) 1 450,00 ₽`
   String get price_3 {
     return Intl.message(
-      'Pro (3 mouht) 1 450,00 \\₽',
+      'Pro (3 mouht) 1 450,00 ₽',
       name: 'price_3',
       desc: '',
       args: [],
     );
   }
 
-  /// `Pro (1 year) 2 170,00 \₽`
+  /// `Pro (1 year) 2 170,00 ₽`
   String get price_4 {
     return Intl.message(
-      'Pro (1 year) 2 170,00 \\₽',
+      'Pro (1 year) 2 170,00 ₽',
       name: 'price_4',
       desc: '',
       args: [],
@@ -327,7 +327,10 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'cn'),
+      Locale.fromSubtags(languageCode: 'es'),
       Locale.fromSubtags(languageCode: 'ru'),
+      Locale.fromSubtags(languageCode: 'uk'),
     ];
   }
 

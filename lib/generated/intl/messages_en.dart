@@ -43,14 +43,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Enter a new document name",
     ),
     "political": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
-    "price_1": MessageLookupByLibrary.simpleMessage("Pro (7 days) 339,00 \\₽"),
-    "price_2": MessageLookupByLibrary.simpleMessage("Pro (1 mouht) 739,00 \\₽"),
-    "price_3": MessageLookupByLibrary.simpleMessage(
-      "Pro (3 mouht) 1 450,00 \\₽",
-    ),
-    "price_4": MessageLookupByLibrary.simpleMessage(
-      "Pro (1 year) 2 170,00 \\₽",
-    ),
+    "price_1": MessageLookupByLibrary.simpleMessage("Pro (7 days) 339,00 ₽"),
+    "price_2": MessageLookupByLibrary.simpleMessage("Pro (1 mouht) 739,00 ₽"),
+    "price_3": MessageLookupByLibrary.simpleMessage("Pro (3 mouht) 1 450,00 ₽"),
+    "price_4": MessageLookupByLibrary.simpleMessage("Pro (1 year) 2 170,00 ₽"),
     "rename": MessageLookupByLibrary.simpleMessage("Rename"),
     "rename_document": MessageLookupByLibrary.simpleMessage("Rename document"),
     "restore": MessageLookupByLibrary.simpleMessage("Restore"),

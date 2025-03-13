@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "chinese_lang": MessageLookupByLibrary.simpleMessage(
       "Китайский (упрощенная версия)",
     ),
-    "current_language": MessageLookupByLibrary.simpleMessage("английский"),
+    "current_language": MessageLookupByLibrary.simpleMessage("Русский"),
     "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
     "documents": MessageLookupByLibrary.simpleMessage("Документы"),
     "english_lang": MessageLookupByLibrary.simpleMessage("Английский"),
@@ -47,12 +47,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "political": MessageLookupByLibrary.simpleMessage(
       "Политика конфиденциальности",
     ),
-    "price_1": MessageLookupByLibrary.simpleMessage("Pro (7 дней) 339,00 \\₽"),
-    "price_2": MessageLookupByLibrary.simpleMessage("Pro (1 месяц) 739,00 \\₽"),
+    "price_1": MessageLookupByLibrary.simpleMessage("Pro (7 дней) 339,00 ₽"),
+    "price_2": MessageLookupByLibrary.simpleMessage("Pro (1 месяц) 739,00 ₽"),
     "price_3": MessageLookupByLibrary.simpleMessage(
-      "Pro (3 месяца) 1 450,00 \\₽",
+      "Pro (3 месяца) 1 450,00 ₽",
     ),
-    "price_4": MessageLookupByLibrary.simpleMessage("Pro (1 год) 2 170,00 \\₽"),
+    "price_4": MessageLookupByLibrary.simpleMessage("Pro (1 год) 2 170,00 ₽"),
     "rename": MessageLookupByLibrary.simpleMessage("Переименовать"),
     "rename_document": MessageLookupByLibrary.simpleMessage(
       "Переименовать документ",
@@ -78,10 +78,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "this_document": MessageLookupByLibrary.simpleMessage("Вот документ"),
     "ukraine_lang": MessageLookupByLibrary.simpleMessage("Украинский"),
     "update_desc": MessageLookupByLibrary.simpleMessage(
-      "\'\'Пакетное сканирование\\n\n              Экспорт без ограничений\\n\n              Неограниченное количество сканирований\\n\n              Распознавание текста (OCR)\\n\'\'",
+      "Пакетное сканирование \n Экспорт без ограничений \n Неограниченное количество сканирований \n Распознавание текста (OCR) \n",
     ),
     "update_header": MessageLookupByLibrary.simpleMessage(
-      "Обновите до Pro-версии и\\n получите доступ ко всем\\n возможностям приложения",
+      "Обновите до Pro-версии и \n получите доступ ко всем \n возможностям приложения",
     ),
     "view": MessageLookupByLibrary.simpleMessage("Просмотреть"),
   };

@@ -67,7 +67,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Не активована",
     ),
     "subscription": MessageLookupByLibrary.simpleMessage(
-      "Підписка на Pro-версію",
+      "Передплати недоступні",
+    ),
+    "start_scanning": MessageLookupByLibrary.simpleMessage("Почати сканування"),
+    "scan_first_document": MessageLookupByLibrary.simpleMessage(
+      "Відскануйте свій перший документ, і він з'явиться у списку документів.",
     ),
     "test_period": MessageLookupByLibrary.simpleMessage(
       "Почати безкоштовний пробний період",

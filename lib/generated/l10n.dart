@@ -313,8 +313,38 @@ class S {
   /// `Chinese (Simplified)`
   String get chinese_lang {
     return Intl.message(
-      'Chinese (Simplified)',
+      'Chinese',
       name: 'chinese_lang',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Scanning`
+  String get start_scanning {
+    return Intl.message(
+      'Start Scanning',
+      name: 'start_scanning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan your first document and it will appear in your list of documents`
+  String get scan_first_document {
+    return Intl.message(
+      'Scan your first document and it will appear in your list of documents',
+      name: 'scan_first_document',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `В хранилище пусто`
+  String get empty_storage {
+    return Intl.message(
+      'В хранилище пусто',
+      name: 'empty_storage',
       desc: '',
       args: [],
     );
@@ -327,7 +357,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
-      Locale.fromSubtags(languageCode: 'cn'),
+      Locale.fromSubtags(languageCode: 'zh'),
       Locale.fromSubtags(languageCode: 'es'),
       Locale.fromSubtags(languageCode: 'ru'),
       Locale.fromSubtags(languageCode: 'uk'),

@@ -18,7 +18,7 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'cn';
+  String get localeName => 'zh';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -48,13 +48,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
     "skip": MessageLookupByLibrary.simpleMessage("跳过"),
     "status_subscription": MessageLookupByLibrary.simpleMessage("未激活"),
-    "subscription": MessageLookupByLibrary.simpleMessage("专业版订阅"),
+    "subscription": MessageLookupByLibrary.simpleMessage("無法訂閱"),
     "test_period": MessageLookupByLibrary.simpleMessage("开始免费试用期"),
     "test_period_desc": MessageLookupByLibrary.simpleMessage("7天试用期。您可以随时取消。"),
     "this_document": MessageLookupByLibrary.simpleMessage("这是文档"),
     "ukraine_lang": MessageLookupByLibrary.simpleMessage("乌克兰语"),
+    "start_scanning": MessageLookupByLibrary.simpleMessage("開始掃描"),
     "update_desc": MessageLookupByLibrary.simpleMessage(
       "批量扫描\n无限制导出\n无限次扫描\n文本识别 (OCR)\n",
+    ),
+    "scan_first_document": MessageLookupByLibrary.simpleMessage(
+      "掃描您的第一份文件，它將出現在您的文件清單中。",
     ),
     "update_header": MessageLookupByLibrary.simpleMessage(
       "升级到专业版并\n获取应用程序的所有\n功能",

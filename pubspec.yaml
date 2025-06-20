@@ -16,9 +16,11 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   provider: 6.1.2
+  image: 4.5.4
   pdf: 3.11.3
-
-  flutter_bloc: 9.0.0
+  fluttertoast: 8.2.12
+  flutter_bloc: 9.1.0
+  in_app_purchase: ^3.2.1
 
 dev_dependencies:
   flutter_test:

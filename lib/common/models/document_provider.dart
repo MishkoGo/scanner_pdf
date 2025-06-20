@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:scanner_pdf/common/models/document.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_doc_scanner/flutter_doc_scanner.dart';
+import 'package:path/path.dart' as p;
 
 class DocumentProvider extends ChangeNotifier {
   List<Document> _documents = [];
@@ -24,6 +26,10 @@ class DocumentProvider extends ChangeNotifier {
     if (savedDocuments != null) {
       List<dynamic> documentList = jsonDecode(savedDocuments);
       _documents = documentList.map((doc) => Document.fromJson(doc)).toList();
+
+      for (var doc in _documents) {
+        print('Загруженный путь к файлу: ${doc.imagePath}');
+      }
     }
     _filterDocuments();
   }
@@ -78,30 +84,29 @@ class DocumentProvider extends ChangeNotifier {
 
   Future<void> scanDocuments() async {
     try {
-      dynamic scannedDocuments = await FlutterDocScanner()
+      List<dynamic>? scannedDocuments = await FlutterDocScanner()
           .getScannedDocumentAsImages(page: 4);
+
       print('Полученные данные: $scannedDocuments');
-      if (scannedDocuments != null &&
-          scannedDocuments['Uri'] != null &&
-          scannedDocuments['Uri'].isNotEmpty) {
-        var imageUirString = scannedDocuments['Uri'];
-        imageUirString = imageUirString
-            .replaceAll(RegExp(r'\]$'), '')
-            .replaceAll(RegExp(r'\}$'), '');
-        int startIndex = imageUirString.indexOf('/data/');
-        String imagePath = '';
-        if (startIndex != -1) {
-          imagePath = imageUirString.substring(startIndex);
+
+      if (scannedDocuments != null && scannedDocuments.isNotEmpty) {
+        
+        List<String> imagePaths = scannedDocuments.cast<String>().map((e) => p.basename(e)).toList();
+
+        for (String path in imagePaths) {
+
+          String documentDate = DateFormat(
+            'dd.MM.yyyy, HH:mm',
+          ).format(DateTime.now());
+
+          Document newDoc = Document(
+            imagePath: path,
+            documentName: 'New scan',
+            documentDate: documentDate,
+          );
+
+          addDocument(newDoc);
         }
-        String documentDate = DateFormat(
-          'dd.MM.yyyy, HH:mm',
-        ).format(DateTime.now());
-        Document newDoc = Document(
-          imagePath: imagePath,
-          documentName: 'New scan',
-          documentDate: documentDate,
-        );
-        addDocument(newDoc);
       }
     } on PlatformException catch (e) {
       print('Ошибка при сканировании: ${e.message}');

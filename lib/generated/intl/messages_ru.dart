@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "current_language": MessageLookupByLibrary.simpleMessage("Русский"),
     "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
     "documents": MessageLookupByLibrary.simpleMessage("Документы"),
+    "empty_storage": MessageLookupByLibrary.simpleMessage("В хранилище пусто"),
     "english_lang": MessageLookupByLibrary.simpleMessage("Английский"),
     "enter_name_document": MessageLookupByLibrary.simpleMessage(
       "Введите название документа",
@@ -61,13 +62,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "rules_uses": MessageLookupByLibrary.simpleMessage("Правила использования"),
     "russian_lang": MessageLookupByLibrary.simpleMessage("Русский"),
     "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
+    "scan_first_document": MessageLookupByLibrary.simpleMessage(
+      "Отсканируйте свой первый документ, и он появится в вашем списке документов",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
     "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
+    "start_scanning": MessageLookupByLibrary.simpleMessage(
+      "Начать сканирование",
+    ),
     "status_subscription": MessageLookupByLibrary.simpleMessage(
       "Не активирована",
     ),
     "subscription": MessageLookupByLibrary.simpleMessage(
-      "Подписка на Pro-версию",
+      "Подписки недоступны",
     ),
     "test_period": MessageLookupByLibrary.simpleMessage(
       "Начать бесплатно пробный период",
@@ -81,6 +88,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Пакетное сканирование \n Экспорт без ограничений \n Неограниченное количество сканирований \n Распознавание текста (OCR) \n",
     ),
     "update_header": MessageLookupByLibrary.simpleMessage(
+      "Обновите до Pro-версии и \n получите доступ ко всем \n возможностям приложения",
+    ),
+    "subscriptionsarenot": MessageLookupByLibrary.simpleMessage(
       "Обновите до Pro-версии и \n получите доступ ко всем \n возможностям приложения",
     ),
     "view": MessageLookupByLibrary.simpleMessage("Просмотреть"),

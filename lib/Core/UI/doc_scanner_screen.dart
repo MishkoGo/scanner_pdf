@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
 import 'package:provider/provider.dart';
 import 'package:scanner_pdf/Core/UI/diamond_bottom_sheet.dart';
 import 'package:scanner_pdf/Core/UI/settings_bottom_sheet.dart';
@@ -8,14 +9,19 @@ import 'package:scanner_pdf/common/models/document.dart';
 import 'package:scanner_pdf/common/models/document_provider.dart';
 import 'package:scanner_pdf/common/style/cubit/theme_cubit.dart';
 import 'package:scanner_pdf/generated/l10n.dart';
-import 'package:scanner_pdf/l10n/l10n.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:share_plus/share_plus.dart';
+import 'package:path/path.dart' as p;
 
 class DocScannerScreen extends StatelessWidget {
-  const DocScannerScreen({Key? key}) : super(key: key);
+  DocScannerScreen({Key? key}) : super(key: key);
+
+  final ValueNotifier<String?> _sendingFilePath = ValueNotifier(null);
+
+  // Кэш для уже созданных PDF-файлов
+  final Map<String, String> _pdfCache = {};
 
   void _showRenameDialog(BuildContext context, Document document) {
     final TextEditingController controller = TextEditingController(
@@ -54,16 +60,56 @@ class DocScannerScreen extends StatelessWidget {
   }
 
   void _showFullScreenImage(BuildContext context, String imagePath) {
+    final currentDir = context.read<Directory>();
+    final file = File(p.join(currentDir.path, imagePath));
+
     showDialog(
       context: context,
       builder: (context) {
         return Dialog(
           backgroundColor: Colors.black,
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Center(
-              child: Image.file(File(imagePath), fit: BoxFit.contain),
-            ),
+          insetPadding:
+              EdgeInsets
+                  .zero, // Убираем отступы, чтобы диалог был на весь экран
+          child: Stack(
+            children: [
+              // Изображение на весь экран
+              Center(
+                child:
+                    file.existsSync()
+                        ? Image.file(
+                          file,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Center(
+                              child: Icon(
+                                Icons.broken_image,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                            );
+                          },
+                        )
+                        : const Center(
+                          child: Icon(
+                            Icons.broken_image,
+                            color: Colors.white,
+                            size: 50,
+                          ),
+                        ),
+              ),
+              // Кнопка закрытия (крестик) в верхнем правом углу
+              Positioned(
+                top: 16,
+                right: 16,
+                child: IconButton(
+                  icon: const Icon(Icons.close, color: Colors.white, size: 30),
+                  onPressed: () {
+                    Navigator.pop(context); // Закрытие диалога
+                  },
+                ),
+              ),
+            ],
           ),
         );
       },
@@ -71,57 +117,68 @@ class DocScannerScreen extends StatelessWidget {
   }
 
   Future<void> shareDocumentAsPdf(String imagePath) async {
+    if (_sendingFilePath.value != null) return;
+
     if (imagePath.isNotEmpty) {
       try {
-        // Проверяем, существует ли файл изображения
+        _sendingFilePath.value = imagePath;
+
         final imageFile = File(imagePath);
         if (!await imageFile.exists()) {
-          print('Изображение не найдено');
+          _sendingFilePath.value = null;
           return;
         }
 
-        // Читаем байты изображения
+        // Проверяем, есть ли PDF в кэше
+        if (_pdfCache.containsKey(imagePath)) {
+          final cachedPdfPath = _pdfCache[imagePath]!;
+          if (File(cachedPdfPath).existsSync()) {
+            await Share.shareXFiles([
+              XFile(cachedPdfPath),
+            ], text: 'Вот документ');
+            _sendingFilePath.value = null;
+            return;
+          }
+        }
+
+        // Сжимаем изображение для ускорения
         final imageBytes = await imageFile.readAsBytes();
+        final decodedImage = img.decodeImage(imageBytes);
+        final resizedImage = img.copyResize(
+          decodedImage!,
+          width: 595, // Ширина A4 в пикселях при 72 DPI
+          height: 842, // Высота A4 в пикселях при 72 DPI
+          interpolation: img.Interpolation.linear,
+        );
+        final compressedBytes = img.encodeJpg(resizedImage, quality: 85);
 
-        // Создаём PDF-документ
+        // Создаем PDF
         final pdf = pw.Document();
-        final pdfImage = pw.MemoryImage(imageBytes);
-
-        // Добавляем страницу с изображением в качестве фонового
+        final pdfImage = pw.MemoryImage(compressedBytes);
         pdf.addPage(
           pw.Page(
             pageFormat: PdfPageFormat.a4,
             build: (pw.Context context) {
-              return pw.Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: pw.BoxDecoration(
-                  image: pw.DecorationImage(
-                    image: pdfImage,
-                    fit: pw.BoxFit.cover,
-                  ),
-                ),
-              );
+              return pw.Center(child: pw.Image(pdfImage));
             },
           ),
         );
 
-        // Получаем путь для сохранения PDF (например, во временной папке)
         final tempDir = await getTemporaryDirectory();
         final pdfPath =
             '${tempDir.path}/document_${DateTime.now().millisecondsSinceEpoch}.pdf';
-
-        // Сохраняем PDF-файл
         final pdfFile = File(pdfPath);
         await pdfFile.writeAsBytes(await pdf.save());
 
-        // Отправляем PDF-файл
+        // Сохраняем путь в кэш
+        _pdfCache[imagePath] = pdfPath;
+
         await Share.shareXFiles([XFile(pdfPath)], text: 'Вот документ');
       } catch (e) {
         print('Ошибка при отправке PDF: $e');
+      } finally {
+        _sendingFilePath.value = null;
       }
-    } else {
-      print('Изображение не найдено');
     }
   }
 
@@ -181,7 +238,7 @@ class DocScannerScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
             Container(
@@ -200,7 +257,7 @@ class DocScannerScreen extends StatelessWidget {
                     color: context.color.textColor,
                   ),
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.all(12),
+                  contentPadding: const EdgeInsets.all(10),
                 ),
                 onChanged: (text) {
                   documentProvider.updateSearch(text);
@@ -209,122 +266,290 @@ class DocScannerScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Expanded(
-              child: ListView.builder(
-                itemCount: documents.length,
-                itemBuilder: (context, index) {
-                  final document = documents[index];
-                  return Card(
-                    color: context.color.card,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${document.documentName} - ${document.documentDate}',
-                            style: context.textStyles.h1,
-                          ),
-                          Row(
-                            children: [
-                              Image.file(
-                                File(document.imagePath),
-                                width: 120,
-                                height: 120,
-                                fit: BoxFit.cover,
+              child:
+                  documents.isEmpty
+                      ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              S.of(context).empty_storage ??
+                                  "В хранилище пусто",
+                              style: context.textStyles.h1.copyWith(
+                                color: context.color.textColor,
+                                fontSize: 24,
                               ),
-                              Column(
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              S.of(context).scan_first_document,
+                              style: context.textStyles.body.copyWith(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 20),
+                            TextButton(
+                              onPressed: () => documentProvider.scanDocuments(),
+                              child: Text(
+                                S.of(context).start_scanning ??
+                                    "Начать сканировать",
+                                style: const TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      : ListView.builder(
+                        itemCount: documents.length,
+                        itemBuilder: (context, index) {
+                          final document = documents[index];
+                          return Card(
+                            color: context.color.card,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  TextButton.icon(
-                                    onPressed:
-                                        () => documentProvider.deleteDocument(
-                                          document,
-                                        ),
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: context.color.textColor,
-                                    ),
-                                    label: Text(S.of(context).delete),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: context.color.card,
-                                      shadowColor: Colors.grey[850],
-                                      foregroundColor: context.color.textColor,
-                                      textStyle: context.textStyles.button,
-                                      elevation: 0,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 0,
-                                      ),
-                                    ),
+                                  Text(
+                                    '${document.documentName} - ${document.documentDate}',
+                                    style: context.textStyles.h1,
                                   ),
-                                  TextButton.icon(
-                                    onPressed:
-                                        () => _showRenameDialog(
-                                          context,
-                                          document,
-                                        ),
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color: context.color.textColor,
-                                    ),
-                                    label: Text(S.of(context).rename),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: context.color.card,
-                                      shadowColor: Colors.grey[850],
-                                      foregroundColor: context.color.textColor,
-                                      elevation: 0,
-                                      textStyle: context.textStyles.button,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 0,
+                                  Row(
+                                    children: [
+                                      Builder(
+                                        builder: (context) {
+                                          final currentDir =
+                                              context.read<Directory>();
+                                          final file = File(
+                                            p.join(
+                                              currentDir.path,
+                                              document.imagePath,
+                                            ),
+                                          );
+                                          if (file.existsSync()) {
+                                            return GestureDetector(
+                                              onTap:
+                                                  () => _showFullScreenImage(
+                                                    context,
+                                                    document.imagePath,
+                                                  ),
+                                              child: Image.file(
+                                                File(file.path),
+                                                width: 110,
+                                                height: 110,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            );
+                                          } else {
+                                            return Container(
+                                              width: 110,
+                                              height: 110,
+                                              color: Colors.grey,
+                                              child: Icon(
+                                                Icons.broken_image,
+                                                size: 40,
+                                              ),
+                                            );
+                                          }
+                                        },
                                       ),
-                                    ),
-                                  ),
-                                  TextButton.icon(
-                                    onPressed:
-                                        () => _showFullScreenImage(
-                                          context,
-                                          document.imagePath,
+                                      const SizedBox(width: 8),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            TextButton.icon(
+                                              onPressed:
+                                                  () => documentProvider
+                                                      .deleteDocument(document),
+                                              icon: Icon(
+                                                Icons.delete,
+                                                color: context.color.textColor,
+                                              ),
+                                              label: Flexible(
+                                                child: Text(
+                                                  S.of(context).delete,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: context
+                                                      .textStyles
+                                                      .button!
+                                                      .copyWith(fontSize: 10),
+                                                ),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    context.color.card,
+                                                shadowColor: Colors.grey[800],
+                                                foregroundColor:
+                                                    context.color.textColor,
+                                                minimumSize: Size.zero,
+                                                textStyle:
+                                                    context.textStyles.button,
+                                                
+                                                elevation: 0,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 6,
+                                                      vertical: 0,
+                                                    ),
+                                                alignment: Alignment.centerLeft,
+                                              ),
+                                            ),
+                                            TextButton.icon(
+                                              onPressed:
+                                                  () => _showRenameDialog(
+                                                    context,
+                                                    document,
+                                                  ),
+                                              icon: Icon(
+                                                Icons.edit,
+                                                color: context.color.textColor,
+                                              ),
+                                              label: Flexible(
+                                                child: Text(
+                                                  S.of(context).rename,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: context
+                                                      .textStyles
+                                                      .button!
+                                                      .copyWith(fontSize: 10),
+                                                ),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    context.color.card,
+                                                shadowColor: Colors.grey[850],
+                                                foregroundColor:
+                                                    context.color.textColor,
+                                                minimumSize: Size.zero,
+                                                
+                                                textStyle:
+                                                    context.textStyles.button,
+                                                elevation: 0,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 6,
+                                                      vertical: 0,
+                                                    ),
+                                                alignment: Alignment.centerLeft,
+                                              ),
+                                            ),
+                                            TextButton.icon(
+                                              onPressed:
+                                                  () => _showFullScreenImage(
+                                                    context,
+                                                    document.imagePath,
+                                                  ),
+                                              icon: Icon(
+                                                Icons.visibility,
+                                                color: context.color.textColor,
+                                              ),
+                                              label: Flexible(
+                                                child: Text(
+                                                  S.of(context).view,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: context
+                                                      .textStyles
+                                                      .button!
+                                                      .copyWith(fontSize: 10),
+                                                ),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    context.color.card,
+                                                shadowColor: Colors.grey[850],
+                                                foregroundColor:
+                                                    context.color.textColor,
+                                                minimumSize: Size.zero,
+                                                textStyle:
+                                                    context.textStyles.button,
+                                               
+                                                elevation: 0,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 6,
+                                                      vertical: 0,
+                                                    ),
+                                                alignment: Alignment.centerLeft,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                    icon: Icon(
-                                      Icons.visibility,
-                                      color: context.color.textColor,
-                                    ),
-                                    label: Text(S.of(context).view),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: context.color.card,
-                                      shadowColor: Colors.grey[850],
-                                      foregroundColor: context.color.textColor,
-                                      textStyle: const TextStyle(fontSize: 13),
-                                      elevation: 0,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                        vertical: 0,
                                       ),
-                                    ),
+                                      const SizedBox(width: 8),
+                                      ValueListenableBuilder<String?>(
+                                        valueListenable: _sendingFilePath,
+                                        builder: (context, sendingPath, _) {
+                                          final isLoading =
+                                              sendingPath == document.imagePath;
+                                          return SizedBox(
+                                            width: 36,
+                                            height: 36,
+                                            child: IconButton(
+                                              onPressed:
+                                                  isLoading
+                                                      ? null
+                                                      : () {
+                                                        final currentDir =
+                                                            context
+                                                                .read<
+                                                                  Directory
+                                                                >();
+                                                        final file = File(
+                                                          p.join(
+                                                            currentDir.path,
+                                                            document.imagePath,
+                                                          ),
+                                                        );
+                                                        shareDocumentAsPdf(
+                                                          file.path,
+                                                        );
+                                                      },
+                                              icon:
+                                                  isLoading
+                                                      ? const SizedBox(
+                                                        width: 24,
+                                                        height: 24,
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                              strokeWidth: 2,
+                                                            ),
+                                                      )
+                                                      : Icon(
+                                                        Icons.share,
+                                                        color:
+                                                            context
+                                                                .color
+                                                                .textColor,
+                                                      ),
+                                              padding: EdgeInsets.zero,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              const SizedBox(width: 9),
-                              IconButton(
-                                onPressed:
-                                    () => shareDocumentAsPdf(document.imagePath),
-                                icon: Icon(
-                                  Icons.share,
-                                  color: context.color.textColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          );
+                        },
                       ),
-                    ),
-                  );
-                },
-              ),
             ),
           ],
         ),

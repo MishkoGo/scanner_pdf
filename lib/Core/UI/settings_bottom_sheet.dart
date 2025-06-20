@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scanner_pdf/Core/UI/diamond_bottom_sheet.dart';
 import 'package:scanner_pdf/common/models/localeProvider.dart';
 import 'package:scanner_pdf/generated/l10n.dart';
 
@@ -41,13 +42,31 @@ class SettingsBottomSheet extends StatelessWidget {
               title: S.of(context).subscription,
               trailing: S.of(context).status_subscription,
               onTap: () {
-                //
+                Navigator.pop(context);
+
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                    isScrollControlled: true,
+                    builder: (context) => const DiamondBottomSheet(),
+                  );
+                });
               },
             ),
             _SettingItem(
               title: S.of(context).manage_subscription,
               onTap: () {
-                //
+                Navigator.pop(context);
+
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+                    isScrollControlled: true,
+                    builder: (context) => const DiamondBottomSheet(),
+                  );
+                });
               },
             ),
             _SettingItem(
@@ -456,11 +475,14 @@ class _SettingItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title, style: const TextStyle(color: Colors.white)),
-            if (trailing != null)
+            Expanded(
+              child: Text(title, style: const TextStyle(color: Colors.white)),
+            ),
+            if (trailing != null) ...[
+              const SizedBox(width: 8,),
               Text(trailing!, style: const TextStyle(color: Colors.white54)),
+            ]
           ],
         ),
       ),

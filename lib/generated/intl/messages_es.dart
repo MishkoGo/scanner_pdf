@@ -61,7 +61,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("Omitir"),
     "status_subscription": MessageLookupByLibrary.simpleMessage("No activada"),
     "subscription": MessageLookupByLibrary.simpleMessage(
-      "Suscripción a la versión Pro",
+      "Las suscripciones no están disponibles",
+    ),
+    "start_scanning": MessageLookupByLibrary.simpleMessage("Iniciar escaneo"),
+    "scan_first_document": MessageLookupByLibrary.simpleMessage(
+      "Utilice todos los documentos necesarios y envíelos a todos los documentos.",
     ),
     "test_period": MessageLookupByLibrary.simpleMessage(
       "Comenzar período de prueba gratuito",

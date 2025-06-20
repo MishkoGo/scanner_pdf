@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "current_language": MessageLookupByLibrary.simpleMessage("English"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "documents": MessageLookupByLibrary.simpleMessage("Documents"),
+    "empty_storage": MessageLookupByLibrary.simpleMessage("В хранилище пусто"),
     "english_lang": MessageLookupByLibrary.simpleMessage("English"),
     "enter_name_document": MessageLookupByLibrary.simpleMessage(
       "Enter document title",
@@ -53,12 +54,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "rules_uses": MessageLookupByLibrary.simpleMessage("Terms of use"),
     "russian_lang": MessageLookupByLibrary.simpleMessage("Russian"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "scan_first_document": MessageLookupByLibrary.simpleMessage(
+      "Scan your first document and it will appear in your list of documents",
+    ),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "start_scanning": MessageLookupByLibrary.simpleMessage("Start Scanning"),
     "status_subscription": MessageLookupByLibrary.simpleMessage(
       "Not activated",
     ),
-    "subscription": MessageLookupByLibrary.simpleMessage("Subscription on Pro"),
+    "subscription": MessageLookupByLibrary.simpleMessage("Subscriptions are not available"),
     "test_period": MessageLookupByLibrary.simpleMessage(
       "Start your free trial",
     ),
